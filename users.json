@@ -1,0 +1,75 @@
+{
+    "users" : {
+        "438749045414952978" : {
+            "name" : "Szarvas",
+            "gifs" : ["https://tenor.com/view/yapping-yapper-yapping-man-old-guy-yapping-keep-yapping-gif-16586719177455162521"],
+            "emotes" : [""]
+        },
+        "451750503991214080" :{
+            "name" : "Benedek",
+            "gifs" : ["https://tenor.com/view/yapping-yapper-yapping-man-old-guy-yapping-keep-yapping-gif-16586719177455162521"],
+            "emotes" : [""]
+        },
+
+        "506829688576933888" : {
+            "name" : "Balint",
+            "gifs" : [""],
+            "emotes" : [""]
+        },
+        "358559894879862785" : {
+            "name" : "Beni",
+            "gifs" : [""],
+            "emotes" : [""]
+        },
+        "415222656271384577" : {
+            "name" : "Timo",
+            "gifs" : ["https://media.discordapp.net/attachments/740236092631941140/978333659520204830/oogaa1.gif "],
+            "emotes" : [""]
+        },
+        "516324104064991263" : {
+            "name" : "Zsolti",
+            "gifs" : [""],
+            "emotes" : [""]
+        },
+        "390919274216030208" : {
+            "name" : "Zoli",
+            "gifs" : ["https://tenor.com/view/kussolj-cig%C3%A1ny-cig%C3%A1ny-gif-24801801"],
+            "emotes" : [""]
+        },
+        "238013276972122112" : {
+            "name" : "Szoti",
+            "gifs" : ["https://tenor.com/view/actually-gif-25661133"],
+            "emotes" : [""]
+        },
+        "688837772965969995" : {
+            "name" : "Istvan",
+            "gifs" : ["https://tenor.com/view/uncle-scrooge-mcduck-money-rich-gif-10170838003545162551"],
+            "emotes" : [""]
+        },
+        "685790657452834830" : {
+            "name" : "Mate",
+            "gifs" : ["https://tenor.com/view/sui-online-chat-hello-sui-gif-23725341"],
+            "emotes" : [""]
+        },
+        "404003894826631178" : {
+            "name" : "Dani",
+            "gifs" : ["https://tenor.com/view/cpp-cplusplus-c-programming-programming-coding-gif-15017077281183755475"],
+            "emotes" : [""]
+        },
+        "386442223321088011" : {
+            "name" : "Gyula",
+            "gifs" : ["https://cdn.discordapp.com/attachments/738385501375037611/1248653678328676542/noob-roblox.gif"],
+            "emotes" : [""]
+        },
+        "default" : {
+            "name" : "default",
+            "gifs" : [""],
+            "emotes" : ["😬", "🤓", "🥶", "🤣","💔", "😳", "🏳️‍🌈", "🇷🇴","<:AnyaEmote:1003675020465279086>"]
+        },
+        "" : {
+            "name" : "",
+            "gifs" : [""],
+            "emotes" : [""]
+        }
+    }
+}

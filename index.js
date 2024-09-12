@@ -4,20 +4,14 @@ const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerSta
 const { TOKEN,CLIENT_ID, CATAPI} = require('./secrets.json');
 const { users } = require('./users.json');
 
-const clr = {
-    red: "\x1b[31m",
-    green: "\x1b[32m",
-    yellow: "\x1b[33m",
-    white: "\x1b[0m",
-    blue: "\x1b[34m"
-};
-
-
-const soundPath = "sounds/"
-
 const chance = {
     "gif": 3,
     "react": 15
+}
+
+function getTime(){
+    const now = new Date();
+    return `${now.getHours()}:${now.getMinutes()}`;
 }
 
 function random(percent) {
@@ -25,11 +19,15 @@ function random(percent) {
 }
 
 function RandomReact(msg,emotes) {
+    emotes = emotes.filter(n => n)
     msg.react(emotes[Math.floor(Math.random() * emotes.length)]);
+    console.log(`${getTime()} Bot has reacted to msg: ${msg.guild.name} -> ${msg.channel.name}`);
 }
 
 function RandomReply(msg,gifs) {
+    gifs = gifs.filter(n => n)
     msg.reply(gifs[Math.floor(Math.random() * gifs.length)]);
+    console.log(`${getTime()} Bot has replied to msg: ${msg.guild.name} -> ${msg.channel.name}`);
 }
 
 function playSound(user,sound){
@@ -38,8 +36,6 @@ function playSound(user,sound){
             
             const channel = user.voice.channel;
 
-            console.log(`${user.user.username} joined a voice channel`);
-
             const connection = joinVoiceChannel({
                 channelId: channel.id,
                 guildId: channel.guild.id,
@@ -47,11 +43,11 @@ function playSound(user,sound){
             });
 
             connection.on(VoiceConnectionStatus.Ready, () => {
-                console.log(`Bot has joined the voice channel: ${channel.name} and played: ${sound}`);
+                console.log(`${getTime()} Bot has joined the voice channel: ${channel.guild.name} -> ${channel.name} and played: ${sound}`);
             });
 
             const player = createAudioPlayer();
-            var resource = createAudioResource(`${soundPath}${sound}.mp3`);
+            var resource = createAudioResource(`sounds/${sound}.mp3`);
 
 
 
@@ -63,11 +59,11 @@ function playSound(user,sound){
             });
 
             player.on('error', error => {
-                console.error(`Error with audio player: ${error.message}`);
+                console.error(`${getTime()} Error with audio player: ${error.message}`);
             });
         }
         catch (error) {
-            console.error(`Error processing voice state update: ${error.message}`);
+            console.error(`${getTime()} Error processing voice state update: ${error.message}`);
         }
 }
 
@@ -122,7 +118,7 @@ const client = new Client({
 });
 
 client.once(Events.ClientReady, readyClient => {
-    console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+    console.log(`${getTime()} Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 
@@ -141,7 +137,7 @@ client.on(Events.MessageCreate, msg => {
 
         if(!msg.author.bot){
         const author = msg.author.id
-        console.log(`${clr.green}${msg.author.username}${clr.white} : '${clr.blue}${msg.content}${clr.white}' => ${clr.yellow}${msg.channel.name}${clr.white}`);
+        //console.log(`${getTime()} ${msg.author.username}$ : ${msg.content} => ${msg.channel.name}`);
             switch(msg.content.toLocaleLowerCase()){
                 case '@everyone':
                     msg.reply("We don't do that here");
@@ -151,27 +147,28 @@ client.on(Events.MessageCreate, msg => {
                     msg.reply('General Kenobi!');
                     return;
             }
-            
-        if(users[author] != undefined){
-            if(random(chance.gif)){
-                RandomReply(msg,users[author].gifs)
-                return;
-            }
-            else if(random(chance.react)) {
-                if(users[author].emotes[0] != ""){
-                    RandomReact(msg,users.default.emotes.concat(users[author].emotes))
-                }
-                else{
-                    RandomReact(msg,users.default.emotes)
-                }
-            }
-        }
-        else{
-            if(random(chance.react)){
-                RandomReact(msg,users.default.emotes)
-            }
-        }
 
+            if(users[author] == undefined){
+                if(users.default.gifs[0] != "" && random(chance.gif)){
+    
+                    RandomReply(msg,users.default.gifs)
+                    return
+                }
+                else if(random(chance.react)){
+                    RandomReact(msg,users.default.emotes)
+                    return
+                }
+            }
+            else{
+                if(users[author].gifs[0] != "" && random(chance.gif)){
+                    RandomReply(msg,users.default.gifs.concat(users[author].gifs))
+                    return
+                }
+                else if(random(chance.react)){
+                    RandomReact(msg,users.default.emotes.concat(users[author].emotes))
+                    return
+                }
+            }2
         }
     }
     catch (error) {
